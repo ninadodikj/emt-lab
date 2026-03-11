@@ -74,4 +74,9 @@ public class BookServiceImpl implements BookService {
                     return bookRepository.save(book);
                 });
     }
+
+    @Override
+    public List<Book> filterBooks(Long a, Long b) {
+        return bookRepository.findAllByIdBetween(a,b);
+    }
 }

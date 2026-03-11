@@ -18,4 +18,6 @@ public interface BookService {
 
     Optional<Book> rentBook(Long id);
 
+    List<Book> filterBooks(Long a,Long b);
+
 }

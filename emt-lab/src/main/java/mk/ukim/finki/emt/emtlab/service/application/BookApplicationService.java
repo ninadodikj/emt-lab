@@ -19,4 +19,6 @@ public interface BookApplicationService {
 
     Optional<DisplayBookDto> rentBook(Long id);
 
+    List<DisplayBookDto> filterBooks(Long a,Long b);
+
 }

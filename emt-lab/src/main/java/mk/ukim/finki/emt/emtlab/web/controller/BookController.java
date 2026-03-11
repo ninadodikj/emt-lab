@@ -61,4 +61,8 @@ public class BookController  {
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+    @GetMapping("/filter")
+    public ResponseEntity<List<DisplayBookDto>> filterBooks(@RequestParam Long a, @RequestParam Long b) {
+        return ResponseEntity.ok(bookApplicationService.filterBooks(a,b));
+    }
 }
