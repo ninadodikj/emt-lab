@@ -1,14 +1,21 @@
 package mk.ukim.finki.emt.emtlab.service.application.impl;
 
 import mk.ukim.finki.emt.emtlab.model.domain.Author;
+import mk.ukim.finki.emt.emtlab.model.dto.BookFilter;
 import mk.ukim.finki.emt.emtlab.model.dto.CreateBookDto;
 import mk.ukim.finki.emt.emtlab.model.dto.DisplayBookDto;
 import mk.ukim.finki.emt.emtlab.model.exception.AuthorNotFoundException;
+import mk.ukim.finki.emt.emtlab.model.exception.BookNotFoundException;
+import mk.ukim.finki.emt.emtlab.model.projection.BookDetailedProjection;
+import mk.ukim.finki.emt.emtlab.model.projection.BookProjection;
 import mk.ukim.finki.emt.emtlab.service.application.BookApplicationService;
 import mk.ukim.finki.emt.emtlab.service.domain.AuthorService;
 import mk.ukim.finki.emt.emtlab.service.domain.BookService;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,5 +78,33 @@ public class BookApplicationServiceImpl implements BookApplicationService {
     public List<DisplayBookDto> filterBooks(Long a, Long b) {
        return DisplayBookDto.from(bookService.filterBooks(a,b));
     }
+
+    @Override
+    public Page<DisplayBookDto> findAll(int page, int size, BookFilter filter) {
+        return bookService.findAll(page, size,filter)
+                .map(DisplayBookDto::from);
+
+    }
+
+    @Override
+    public List<BookProjection> findAllProjection() {
+        return bookService.findAllProjection();
+    }
+
+    @Override
+    public Optional<BookDetailedProjection> findBookDetailedById(Long id) {
+        return bookService.findBookDetailedById(id);
+    }
+
+    @Override
+    public List<DisplayBookDto> findWithAuthorAndCountry() {
+        return bookService.findWithAuthorAndCountry().stream().map(DisplayBookDto::from).toList();
+    }
+
+    @Override
+    public Optional<DisplayBookDto> findWithAuthorAndCountryById(Long id) {
+        return bookService.findWithAuthorAndCountryById(id).map(DisplayBookDto::from);
+    }
+
 
 }

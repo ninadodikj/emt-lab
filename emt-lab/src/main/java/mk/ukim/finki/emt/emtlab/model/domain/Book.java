@@ -12,6 +12,20 @@ import mk.ukim.finki.emt.emtlab.model.enums.State;
 @Setter
 @NoArgsConstructor
 @Table(name="books")
+@NamedEntityGraph(
+        name="book-entity-graph",
+        attributeNodes = {
+                @NamedAttributeNode(value="author",subgraph = "author-subgraph"),
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name="author-subgraph",
+                        attributeNodes = {
+                                @NamedAttributeNode("country")
+                        }
+                )
+        }
+)
 public class Book extends BaseAuditableEntity{
     @Column(nullable = false,unique = true)
     private String name;

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/emt-lab/src/main/resources/db/migration/R__create_book_view.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/emt-lab/src/main/resources/db/migration/V1__create_initial_tables.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/emt-lab/src/main/resources/db/migration/V3__create_materialized_book_view.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/emt-lab/src/main/resources/db/migration/V4__create_book_rent_activity_log.sql" dialect="GenericSQL" />
+  </component>
+</project>

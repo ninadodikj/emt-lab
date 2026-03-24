@@ -1,13 +1,21 @@
 package mk.ukim.finki.emt.emtlab.web.controller;
 
 import jakarta.validation.Valid;
+import mk.ukim.finki.emt.emtlab.model.dto.BookFilter;
 import mk.ukim.finki.emt.emtlab.model.dto.CreateBookDto;
 import mk.ukim.finki.emt.emtlab.model.dto.DisplayBookDto;
+import mk.ukim.finki.emt.emtlab.model.enums.Category;
+import mk.ukim.finki.emt.emtlab.model.enums.State;
+import mk.ukim.finki.emt.emtlab.model.projection.BookDetailedProjection;
+import mk.ukim.finki.emt.emtlab.model.projection.BookProjection;
 import mk.ukim.finki.emt.emtlab.service.application.BookApplicationService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/books")
@@ -64,5 +72,36 @@ public class BookController  {
     @GetMapping("/filter")
     public ResponseEntity<List<DisplayBookDto>> filterBooks(@RequestParam Long a, @RequestParam Long b) {
         return ResponseEntity.ok(bookApplicationService.filterBooks(a,b));
+    }
+    @GetMapping("/paginated")
+    public ResponseEntity<Page<DisplayBookDto>> findAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false)Category category,
+            @RequestParam(required = false) State state,
+            @RequestParam(required = false) Long authorId,
+            @RequestParam(required = false) Boolean availableCopiesOnly
+            ) {
+        BookFilter filter = new BookFilter(category,state,authorId,availableCopiesOnly);
+        return ResponseEntity.ok(bookApplicationService.findAll(page, size,filter));
+    }
+    @GetMapping("/projection")
+    public ResponseEntity<List<BookProjection>> findAllProjection(){
+        return ResponseEntity.ok(bookApplicationService.findAllProjection());
+    }
+    @GetMapping("{id}/detailed")
+    public ResponseEntity<Optional<BookDetailedProjection>> findBookDetailedById(@PathVariable Long id){
+        return ResponseEntity.ok(bookApplicationService.findBookDetailedById(id));
+    }
+    @GetMapping("/withgraph")
+    public ResponseEntity<List<DisplayBookDto>> findBooksWithGraph(){
+        return ResponseEntity.ok(bookApplicationService.findWithAuthorAndCountry());
+    }
+    @GetMapping("{id}/withgraph")
+    public ResponseEntity<DisplayBookDto> findBookWithGraphById(@PathVariable Long id){
+        return bookApplicationService
+                .findWithAuthorAndCountryById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
