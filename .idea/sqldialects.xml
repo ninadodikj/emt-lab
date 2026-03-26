@@ -5,5 +5,7 @@
     <file url="file://$PROJECT_DIR$/emt-lab/src/main/resources/db/migration/V1__create_initial_tables.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/emt-lab/src/main/resources/db/migration/V3__create_materialized_book_view.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/emt-lab/src/main/resources/db/migration/V4__create_book_rent_activity_log.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/emt-lab/src/main/resources/db/migration/V7__popular_books.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/emt-lab/src/main/resources/db/migration/V8__popular_authors_view.sql" dialect="GenericSQL" />
   </component>
 </project>

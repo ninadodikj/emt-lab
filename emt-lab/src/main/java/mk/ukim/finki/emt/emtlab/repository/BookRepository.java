@@ -36,4 +36,5 @@ public interface BookRepository extends JpaRepository<Book,Long>, JpaSpecificati
 
     @EntityGraph(value="book-entity-graph",type=EntityGraph.EntityGraphType.FETCH)
     Optional<Book> findWithAuthorAndCountryById(Long id);
+
 }
