@@ -1,6 +1,7 @@
 package mk.ukim.finki.emt.emtlab.service.domain.impl;
 
 import mk.ukim.finki.emt.emtlab.model.domain.Author;
+import mk.ukim.finki.emt.emtlab.model.projection.AuthorDetailedProjection;
 import mk.ukim.finki.emt.emtlab.repository.AuthorRepository;
 import mk.ukim.finki.emt.emtlab.service.domain.AuthorService;
 import org.springframework.stereotype.Service;
@@ -49,5 +50,10 @@ public class AuthorServiceImpl implements AuthorService {
         Optional<Author> author=authorRepository.findById(id);
         author.ifPresent(authorRepository::delete);
         return author;
+    }
+
+    @Override
+    public Optional<AuthorDetailedProjection> findAuthorDetailedById(Long id) {
+        return authorRepository.findAuthorDetailedBy(id);
     }
 }

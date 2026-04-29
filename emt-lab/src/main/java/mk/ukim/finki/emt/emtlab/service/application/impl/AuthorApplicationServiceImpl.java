@@ -4,6 +4,7 @@ import mk.ukim.finki.emt.emtlab.model.domain.Country;
 import mk.ukim.finki.emt.emtlab.model.dto.CreateAuthorDto;
 import mk.ukim.finki.emt.emtlab.model.dto.DisplayAuthorDto;
 import mk.ukim.finki.emt.emtlab.model.exception.CountryNotFoundException;
+import mk.ukim.finki.emt.emtlab.model.projection.AuthorDetailedProjection;
 import mk.ukim.finki.emt.emtlab.service.application.AuthorApplicationService;
 import mk.ukim.finki.emt.emtlab.service.domain.AuthorService;
 import mk.ukim.finki.emt.emtlab.service.domain.CountryService;
@@ -56,5 +57,10 @@ public class AuthorApplicationServiceImpl implements AuthorApplicationService {
         return authorService
                 .deleteById(id)
                 .map(DisplayAuthorDto::from);
+    }
+
+    @Override
+    public Optional<AuthorDetailedProjection> findAuthorDetailedById(Long id) {
+        return authorService.findAuthorDetailedById(id);
     }
 }

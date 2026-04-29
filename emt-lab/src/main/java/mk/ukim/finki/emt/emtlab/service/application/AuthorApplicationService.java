@@ -2,6 +2,7 @@ package mk.ukim.finki.emt.emtlab.service.application;
 
 import mk.ukim.finki.emt.emtlab.model.dto.CreateAuthorDto;
 import mk.ukim.finki.emt.emtlab.model.dto.DisplayAuthorDto;
+import mk.ukim.finki.emt.emtlab.model.projection.AuthorDetailedProjection;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,5 +16,6 @@ public interface AuthorApplicationService {
     Optional<DisplayAuthorDto> update(Long id,CreateAuthorDto createAuthorDto);
 
     Optional<DisplayAuthorDto> deleteById(Long id);
+    Optional<AuthorDetailedProjection> findAuthorDetailedById(Long id);
 
 }

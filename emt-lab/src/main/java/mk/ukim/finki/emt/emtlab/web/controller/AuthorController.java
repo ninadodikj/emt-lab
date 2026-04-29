@@ -3,11 +3,13 @@ package mk.ukim.finki.emt.emtlab.web.controller;
 import jakarta.validation.Valid;
 import mk.ukim.finki.emt.emtlab.model.dto.CreateAuthorDto;
 import mk.ukim.finki.emt.emtlab.model.dto.DisplayAuthorDto;
+import mk.ukim.finki.emt.emtlab.model.projection.AuthorDetailedProjection;
 import mk.ukim.finki.emt.emtlab.service.application.AuthorApplicationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/authors")
@@ -52,6 +54,11 @@ public class AuthorController {
                 .deleteById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("{id}/detailed")
+    public ResponseEntity<Optional<AuthorDetailedProjection>> findAuthorDetailedById(@PathVariable Long id){
+        return ResponseEntity.ok(authorApplicationService.findAuthorDetailedById(id));
     }
 
 }

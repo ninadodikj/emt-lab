@@ -1,6 +1,8 @@
 package mk.ukim.finki.emt.emtlab.service.domain;
 
 import mk.ukim.finki.emt.emtlab.model.domain.Author;
+import mk.ukim.finki.emt.emtlab.model.projection.AuthorDetailedProjection;
+import mk.ukim.finki.emt.emtlab.model.projection.BookDetailedProjection;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,5 +20,6 @@ public interface AuthorService{
     Optional<Author> update(Long id,Author author);
 
     Optional<Author> deleteById(Long id);
+    Optional<AuthorDetailedProjection>  findAuthorDetailedById(Long id);
 
 }
